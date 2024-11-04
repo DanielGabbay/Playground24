@@ -1,9 +1,20 @@
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import {
+  BehaviorSubject,
+  interval,
+  Observable,
+  Subject,
+  Subscription,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.scss',
 })
@@ -19,19 +30,14 @@ export class CounterComponent {
   /* ------------------------------------------------  Signals ------------------------------------------------ */
 
   /* -------------------------------------------------- Data -------------------------------------------------- */
-  protected count = 0;
   private running = false;
-  private intervalID;
+  protected readonly count$ = new BehaviorSubject<number>(0);
+  private intervalSubscription: Subscription;
+  private destory$ = new Subject<boolean>()
+
   /* ------------------------------------------------  Constructor ------------------------------------------------ */
   constructor() {
-    console.log(this.count);
-    this.intervalID = setInterval(() => {
-      if (this.running) {
-          this.count++;
-          console.log(this.count)
-          // updateCounter()
-      }
-  }, 1000)
+
   }
 
   /* ----------------------------------------------- Lifecycle Hooks ----------------------------------------------- */
@@ -39,20 +45,29 @@ export class CounterComponent {
   /* ------------------------------------------------  Methods ------------------------------------------------ */
 
   protected start() {
-    this.running = true;
+    if (!this.running) {
+      this.running = true;
+
+      this.intervalSubscription = interval(1000)
+        .pipe(tap(() => this.count$.next(this.count$.value + 1)),takeUntil(this.destory$))
+        .subscribe();
+    }
   }
 
   protected stop() {
-    this.running = false;
+    if(this.running) {
+      this.running = false;
+      this.intervalSubscription.unsubscribe();
+    }
   }
 
   protected kill() {
-    // if(this.intervalID.hasRef()){
-      clearInterval(this.intervalID)
+    // if(this.running) {
+    //   this.intervalSubscription.unsubscribe();
     // }
+    this.destory$.next(true)
   }
   protected reset() {
-    this.count = 0;
-    // renderCounter()
+    this.count$.next(0);
   }
 }

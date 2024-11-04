@@ -1,4 +1,4 @@
-<span id="counter">{{ count }}</span>
+<span id="counter">{{count$ | async}}</span>
 <div class="control-buttons-container">
   <button id="startButton" class="control-button" (click)="start()">
     Start
