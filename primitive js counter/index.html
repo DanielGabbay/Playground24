@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground app</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            /* overflow: hidden; */
+            font-size: 14px;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-title {
+            flex: 0;
+            color: red;
+        }
+
+        .container {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        #counter {
+            font-size: 8rem;
+            border: 3px dotted blue;
+            padding-inline: 2rem;
+            background: lightblue;
+        }
+
+        .control-buttons-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .control-button {
+            width: 20rem;
+            height: 5rem;
+            font-size: 2rem;
+            background: lightseagreen;
+            cursor: pointer;
+        }
+    </style>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialization
+            const startButton = document.getElementById("startButton");
+            const stopButton = document.getElementById("stopButton");
+            const killButton = document.getElementById("killButton");
+            const resetButton = document.getElementById("resetButton");
+            const counter = document.getElementById("counter");
+
+
+
+            let count = 0;
+            let running = false;
+
+            const intervalID = setInterval(() => {
+                if (running) {
+                    count++;
+                    console.log(count)
+                    updateCounter()
+                }
+            }, 1000)
+
+            function updateCounter(){
+                counter.textContent = count;
+            }
+
+            function start() {
+                running = true;
+            }
+
+            function stop() {
+                running = false;
+            }
+
+            function kill() {
+                clearInterval(intervalID)
+            }
+            function reset() {
+                count = 0;
+                updateCounter()
+            }
+
+            // Start Button
+            startButton.addEventListener("click", start)
+            stopButton.addEventListener("click", stop)
+            killButton.addEventListener("click", kill)
+            resetButton.addEventListener("click", reset)
+
+        })
+
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <h1 class="main-title">Wellcome to Playgorund App</h1>
+    <div class="container">
+        <span id="counter">0</span>
+        <div class="control-buttons-container">
+            <button id="startButton1" class="control-button">Start</button>
+            <button id="stopButton1" class="control-button">Stop</button>
+            <button id="killButton1" class="control-button">Kill</button>
+            <button id="resetButton1" class="control-button">Reset</button>
+        </div>
+    </div>
+    <div class="container">
+        <span id="counter">0</span>
+        <div class="control-buttons-container">
+            <button id="startButton2" class="control-button">Start</button>
+            <button id="stopButton2" class="control-button">Stop</button>
+            <button id="killButton2" class="control-button">Kill</button>
+            <button id="resetButton2" class="control-button">Reset</button>
+        </div>
+    </div>
+</body>
+
+</html>
