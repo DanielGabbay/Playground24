@@ -3,7 +3,7 @@ export enum TaskStatus {
   COMPLETED = 'COMPLETED',
 }
 
-export type Task = {
+export type ITask = {
   id: string;
   title: string;
   status: TaskStatus;

@@ -2,8 +2,45 @@
   icon="pi pi-plus-circle"
   label="הוספת רשימה"
   [outlined]="true"
-  (click)="dialogVisible = !dialogVisible"
+  (click)="dialogVisible$.set(true)"
 />
-<p-dialog [(visible)]="dialogVisible" [modal]="true" header="הוספת רשימת משימות חדשה"> 
-    
+<p-dialog
+  [(visible)]="dialogVisible$"
+  [modal]="true"
+  header="הוספת רשימת משימות חדשה"
+>
+  <div class="flex flex-col gap-2">
+    @let hasError = errors$().length > 0;
+    <div class="flex flex-col">
+      <label for="newListName">הזן שם לרשימה החדשה</label>
+      <input
+        pInputText
+        id="newListName"
+        [(ngModel)]="newListName$"
+        [ngClass]="{
+          'ng-invalid ng-dirty': hasError
+        }"
+      />
+      @for(error of allErrors$();track error) {
+      <small class="text-red-500">
+        {{ error }}
+      </small>
+      }
+    </div>
+    <div class="flex justify-end gap-2">
+      <p-button
+        label="ביטול"
+        [outlined]="true"
+        severity="secondary"
+        (click)="dialogVisible$.set(false)"
+      />
+      <p-button
+        [loading]="inCreation"
+        label="אישור"
+        [raised]="true"
+        [disabled]="hasError"
+        (click)="createNewList()"
+      />
+    </div>
+  </div>
 </p-dialog>
