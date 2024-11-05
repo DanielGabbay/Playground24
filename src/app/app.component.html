@@ -1,4 +1,16 @@
-<div class="prose lg:prose-xl">
-<h1 class="main-title">Wellcome to Playgorund App</h1>
+<main id="MAIN_APP_CONTAINER" class="w-full h-full flex flex-col gap-2">
+  <div class="flex gap-2">
+    <app-menubar class="flex-1" />
+    <div class="flex items-center justify-center">
+      <app-add-new-list />
+    </div>
+  </div>
 
-</div>
+  <div class="flex flex-col items-center justify-center gap-4 flex-1">
+    <app-input-number />
+    <div class="flex justify-around w-full">
+      <app-odd-number />
+      <app-even-number />
+    </div>
+  </div>
+</main>

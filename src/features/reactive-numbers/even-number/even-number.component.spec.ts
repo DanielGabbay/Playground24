@@ -1,18 +1,18 @@
 import { Component, ChangeDetectionStrategy,Fixture, TestBed } from '@angular/core/testing';
 
-import { CounterComponent } from './counter.component';
+import { EvenNumberComponent } from './even-number.component';
 
-describe('CounterComponent', () => {
-  let component: CounterComponent;
-  let fixture: ComponentFixture<CounterComponent>;
+describe('EvenNumberComponent', () => {
+  let component: EvenNumberComponent;
+  let fixture: ComponentFixture<EvenNumberComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CounterComponent]
+      imports: [EvenNumberComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CounterComponent);
+    fixture = TestBed.createComponent(EvenNumberComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,20 @@
+<!-- 
+        [ngModel]="numbersService.value$ | async"
+        (ngModelChange)="numbersService.value$.next($event)" 
+-->
+
+<p-inputNumber
+  [(ngModel)]="numbersService.valueSignal$"
+  [style]="{ width: '4rem' }"
+  [showButtons]="true"
+  buttonLayout="vertical"
+  spinnerMode="vertical"
+  inputId="vertical"
+  decrementButtonClass="p-button-secondary"
+  incrementButtonClass="p-button-secondary"
+  incrementButtonIcon="pi pi-plus"
+  decrementButtonIcon="pi pi-minus"
+/>
+
+<br />
+valuePow: {{ numbersService.valuePowSignal$() }}

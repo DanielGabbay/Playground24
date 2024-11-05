@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, ChangeDetectionStrategy,Fixture, TestBed } from '@angular/core/testing';
 
 import { TodoPanelComponent } from './todo-panel.component';
 

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, } from '@angular/core';
 import {
   BehaviorSubject,
   interval,
@@ -17,6 +17,7 @@ import {
   imports: [AsyncPipe],
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.scss',
+ changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent {
   /* ------------------------------------------  Types and Constants ------------------------------------------ */

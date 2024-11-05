@@ -1,0 +1,17 @@
+<!-- <div 
+class="border p-8"
+[ngClass]="{
+    'bg-red-200': (numbersService.value$ | async) % 2 != 0,
+    'bg-green-200': (numbersService.value$ | async) % 2 == 0
+  }"
+>זוגי</div> -->
+
+<div
+  class="border p-8"
+  [ngClass]="{
+    'bg-red-200': numbersService.valueSignal$() % 2 != 0,
+    'bg-green-200': numbersService.valueSignal$() % 2 == 0
+  }"
+>
+  זוגי
+</div>
