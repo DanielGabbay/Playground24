@@ -1,4 +1,4 @@
-import { Inject, Injectable, signal } from '@angular/core';
+import { Inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { map, Observable, of, switchMap, tap, timeout } from 'rxjs';
 import { IList } from './list.model';
 
@@ -7,7 +7,8 @@ import { IList } from './list.model';
 })
 export class TodoListService {
   private static LIST_PREFIX: string = 'LIST_';
-  private readonly _allLists$ = signal<IList[]>(null);
+
+  private readonly _allLists$: WritableSignal<IList[]> = signal<IList[]>(null);
   public readonly allLists$ = this._allLists$.asReadonly();
 
   constructor() {
@@ -51,7 +52,7 @@ export class TodoListService {
     return of(true).pipe(
       timeout(1000),
       switchMap(() => {
-        return this.getLists(true)
+        return this.getLists(true);
       }),
       map(Boolean)
     );
